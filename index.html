@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Secrets of Super Longevity</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        .phase {
+            display: none;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        .phase.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .survey-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .survey-question {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .survey-question:hover {
+            border-color: #4ecdc4;
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.2);
+        }
+
+        .survey-question h3 {
+            color: #4ecdc4;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            margin: 0.8rem 0;
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: rgba(78, 205, 196, 0.1);
+            transform: translateX(5px);
+        }
+
+        .option input[type="radio"] {
+            display: none;
+        }
+
+        .option .custom-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #4ecdc4;
+            border-radius: 50%;
+            margin-right: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .option input[type="radio"]:checked + .custom-radio {
+            background: #4ecdc4;
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.5);
+        }
+
+        .option input[type="radio"]:checked + .custom-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .reading-section {
+            position: relative;
+        }
+
+        .paragraph {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid #4ecdc4;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 0 15px 15px 0;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .paragraph::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.05) 0%, rgba(69, 183, 209, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .paragraph:hover::before {
+            opacity: 1;
+        }
+
+        .paragraph:hover {
+            transform: translateX(10px);
+            border-left-color: #ff6b6b;
+        }
+
+        .paragraph.active {
+            background: rgba(78, 205, 196, 0.1);
+            border-left-color: #ff6b6b;
+        }
+
+        .vocabulary-word {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            padding: 2px 8px;
+            border-radius: 15px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        .vocabulary-word:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .definition-popup {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.95);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            max-width: 300px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            border: 1px solid #4ecdc4;
+        }
+
+        .definition-popup.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.3);
+            border-color: #4ecdc4;
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .score-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid #4ecdc4;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .score-display h3 {
+            color: #4ecdc4;
+            margin-bottom: 0.5rem;
+        }
+
+        .memory-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            perspective: 1000px;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .memory-card.flipped {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            border-color: #ff6b6b;
+            cursor: default;
+        }
+
+        .synonym-matching-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .synonym-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .synonym-column-header {
+            text-align: center;
+            font-weight: bold;
+            color: #4ecdc4;
+            padding: 1rem;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(78, 205, 196, 0.2);
+            backdrop-filter: blur(10px);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        .synonym-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .synonym-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+            border-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .synonym-card.selected {
+            border-color: #45b7d1;
+            background: rgba(69, 183, 209, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 0 0 2px rgba(69, 183, 209, 0.4);
+        }
+
+        .synonym-card.matched {
+            border-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.2);
+            color: #4ecdc4;
+            cursor: default;
+            transform: none;
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.4);
+        }
+
+        .synonym-card.matched::after {
+            content: '✓';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(78, 205, 196, 0.5);
+        }
+
+        .synonym-card.incorrect {
+            border-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.2);
+            animation: shake 0.5s ease-in-out;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .synonym-connection-line {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, #4ecdc4, #45b7d1);
+            z-index: 10;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+            box-shadow: 0 0 8px rgba(78, 205, 196, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .synonym-matching-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .synonym-card {
+                font-size: 0.8rem;
+                padding: 0.8rem;
+            }
+        }
+
+        .match-game-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .match-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .match-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .match-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .word-card {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 107, 107, 0.05));
+            border-left: 4px solid #ff6b6b;
+            cursor: grab;
+        }
+
+        .word-card:active {
+            cursor: grabbing;
+        }
+
+        .word-card i {
+            color: #ff6b6b;
+            font-size: 1.1rem;
+        }
+
+        .definition-card {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(78, 205, 196, 0.05));
+            border-left: 4px solid #4ecdc4;
+            min-height: 80px;
+        }
+
+        .definition-card i {
+            color: #4ecdc4;
+            font-size: 0.9rem;
+            align-self: flex-start;
+            margin-top: 0.2rem;
+        }
+
+        .match-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .match-card.matched.correct {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.2), rgba(39, 174, 96, 0.1));
+            border-color: #2ecc71;
+            border-width: 2px;
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .match-card.matched.correct i {
+            color: #2ecc71;
+        }
+
+        .match-card.incorrect {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.2), rgba(192, 57, 43, 0.1));
+            border-color: #e74c3c;
+            animation: shake 0.5s ease-in-out;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .match-card.incorrect i {
+            color: #e74c3c;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .match-game-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .match-card {
+                font-size: 0.85rem;
+                padding: 1rem;
+            }
+        }
+
+        .completion-celebration {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .completion-celebration h2 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .completion-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4ecdc4;
+            display: block;
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #4ecdc4;
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .glass-card {
+                padding: 1.5rem;
+            }
+            
+            .paragraph {
+                padding: 1.5rem;
+            }
+            
+            .score-display {
+                position: relative;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles"></div>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="score-display">
+        <h3><i class="fas fa-star"></i> Your Score</h3>
+        <div id="scoreValue">0</div>
+        <div style="font-size: 0.8rem; color: #a0a0a0; margin-top: 0.5rem;">
+            Phase: <span id="phaseIndicator">Pre-Reading</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Pre-Reading Phase -->
+        <div class="phase active" id="preReading">
+            <div class="header">
+                <h1><i class="fas fa-dna"></i> The Secrets of Super Longevity</h1>
+                <p>Unlock the mysteries of extreme old age through science and discovery</p>
+            </div>
+
+            <div class="glass-card">
+                <h2 style="color: #4ecdc4; margin-bottom: 1.5rem;">
+                    <i class="fas fa-clipboard-list"></i> Pre-Reading Survey
+                </h2>
+                <p style="margin-bottom: 2rem; color: #a0a0a0;">
+                    Let's explore what you already know about aging and longevity!
+                </p>
+
+                <div class="survey-grid">
+                    <div class="survey-question">
+                        <h3><i class="fas fa-birthday-cake"></i> What's the oldest age you think humans can reach?</h3>
+                        <label class="option">
+                            <input type="radio" name="maxAge" value="90-100">
+                            <span class="custom-radio"></span>
+                            90-100 years old
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="maxAge" value="100-110">
+                            <span class="custom-radio"></span>
+                            100-110 years old
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="maxAge" value="110-120">
+                            <span class="custom-radio"></span>
+                            110-120 years old
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="maxAge" value="120+">
+                            <span class="custom-radio"></span>
+                            Over 120 years old
+                        </label>
+                    </div>
+
+                    <div class="survey-question">
+                        <h3><i class="fas fa-heart"></i> What do you think is most important for living a long life?</h3>
+                        <label class="option">
+                            <input type="radio" name="longevityFactor" value="genetics">
+                            <span class="custom-radio"></span>
+                            Good genetics
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="longevityFactor" value="lifestyle">
+                            <span class="custom-radio"></span>
+                            Healthy lifestyle
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="longevityFactor" value="medical">
+                            <span class="custom-radio"></span>
+                            Medical advances
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="longevityFactor" value="luck">
+                            <span class="custom-radio"></span>
+                            Pure luck
+                        </label>
+                    </div>
+
+                    <div class="survey-question">
+                        <h3><i class="fas fa-brain"></i> How do you think aging affects the brain?</h3>
+                        <label class="option">
+                            <input type="radio" name="brainAging" value="always-declines">
+                            <span class="custom-radio"></span>
+                            It always declines with age
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="brainAging" value="can-stay-sharp">
+                            <span class="custom-radio"></span>
+                            It can stay sharp in some people
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="brainAging" value="improves">
+                            <span class="custom-radio"></span>
+                            It actually improves with age
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="brainAging" value="not-sure">
+                            <span class="custom-radio"></span>
+                            I'm not sure
+                        </label>
+                    </div>
+
+                    <div class="survey-question">
+                        <h3><i class="fas fa-microscope"></i> Have you heard of telomeres?</h3>
+                        <label class="option">
+                            <input type="radio" name="telomeres" value="yes-know-well">
+                            <span class="custom-radio"></span>
+                            Yes, I know what they are
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="telomeres" value="heard-of">
+                            <span class="custom-radio"></span>
+                            I've heard of them
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="telomeres" value="never-heard">
+                            <span class="custom-radio"></span>
+                            Never heard of them
+                        </label>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="startReading()">
+                    <i class="fas fa-arrow-right"></i> Start Reading Adventure
+                </button>
+            </div>
+        </div>
+
+        <!-- Reading Phase -->
+        <div class="phase" id="reading">
+            <div class="header">
+                <h1><i class="fas fa-book-open"></i> Interactive Reading</h1>
+                <p>Click on highlighted words to discover their meanings!</p>
+            </div>
+
+            <div class="glass-card reading-section">
+                <div class="paragraph" onclick="activateParagraph(0)">
+                    The deepest dive yet into the biology of a <span class="vocabulary-word" data-definition="A person who has reached the age of 110 or more">supercentenarian</span> has revealed that even extreme old age can be reached without the brain necessarily <span class="vocabulary-word" data-definition="To weaken or fail gradually">faltering</span> or the usual illnesses mounting up. Doctors in Spain conducted a <span class="vocabulary-word" data-definition="Covering all or nearly all elements or aspects; complete">comprehensive</span> suite of tests on Maria Branyas Morera, who was the world's oldest person before she died at 117 years old last year.
+                </div>
+
+                <div class="paragraph" onclick="activateParagraph(1)">
+                    They discovered that while her body showed clear signs of extreme old age, a number of biological factors protected her from the diseases that normally <span class="vocabulary-word" data-definition="To cause suffering or trouble persistently">plague</span> the final years of life. "The common rule is that as we age we become sicker, but she was an exception and we wanted to understand why," said Dr Manel Esteller at the Josep Carreras <span class="vocabulary-word" data-definition="A type of cancer that affects blood and bone marrow">Leukaemia</span> Research Institute in Barcelona.
+                </div>
+
+                <div class="paragraph" onclick="activateParagraph(2)">
+                    "For the first time, we've been able to separate being old from being sick." In the years before she died, Branyas invited doctors to study her to learn why she had reached such a <span class="vocabulary-word" data-definition="Fully mature; ready for harvesting or eating (used figuratively to mean 'advanced' age)">ripe</span> old age. Born in San Francisco in 1907, Branyas moved to Catalonia in 1915 and survived two world wars, the Spanish civil war and the Covid pandemic, recovering from the virus aged 113.
+                </div>
+
+                <div class="paragraph" onclick="activateParagraph(3)">
+                    Esteller and his colleagues drew on blood, saliva, urine and stool samples collected a year before Branyas's death to build a detailed picture of her biology. The tests delved into her <span class="vocabulary-word" data-definition="The study of heredity and genetic variation">genetics</span> and the extent to which different genes were switched on and off; the varieties and levels of proteins in her blood, the <span class="vocabulary-word" data-definition="Products formed when substances are broken down by chemical processes in the body">breakdown products</span> from reactions in her body and the diversity of <span class="vocabulary-word" data-definition="Tiny living organisms, especially bacteria">microbes</span> in her gut.
+                </div>
+
+                <div class="paragraph" onclick="activateParagraph(4)">
+                    Among a <span class="vocabulary-word" data-definition="A collection of valuable items or information">trove</span> of discoveries, they found that protective caps called <span class="vocabulary-word" data-definition="Protective DNA-protein structures found at the end of chromosomes that shorten with age">telomeres</span> on the ends of Branyas's <span class="vocabulary-word" data-definition="Thread-like structures containing DNA and genetic information">chromosomes</span> were exceptionally short, a clear sign of old age in her cells. Her immune system also showed signs of old age, was prone to <span class="vocabulary-word" data-definition="The body's response to injury or infection, often involving swelling and pain">inflammation</span>, and she had acquired <span class="vocabulary-word" data-definition="Changes in DNA that can occur naturally or due to environmental factors">mutations</span> that lead to leukaemia.
+                </div>
+
+                <div class="paragraph" onclick="activateParagraph(5)">
+                    But Branyas was seemingly well protected. Telomeres shorten whenever cells divide, and hers were so short they may have protected her from cancer by limiting the amount that cells continued to divide, Esteller said. A close look at her DNA revealed gene variants that protected her heart and brain cells from disease and <span class="vocabulary-word" data-definition="A decline in mental ability severe enough to interfere with daily life">dementia</span>.
+                </div>
+
+                <div class="paragraph" onclick="activateParagraph(6)">
+                    She had low levels of inflammation throughout her body, which reduced her risk of cancer and diabetes, and efficient <span class="vocabulary-word" data-definition="A waxy substance that can build up in arteries; also essential for making hormones">cholesterol</span> and fat <span class="vocabulary-word" data-definition="The chemical processes by which the body converts food into energy">metabolism</span>. "These are all critical because they're linked to diseases that are typical in older people and they kill you at the end," Esteller said.
+                </div>
+
+                <div class="paragraph" onclick="activateParagraph(7)">
+                    The team then turned to <span class="vocabulary-word" data-definition="Methods that measure biological age based on changes in gene activity">epigenetic clocks</span>, which look at patterns of gene expression, to assess Branyas's biological age. "She was at least 10 to 15 years younger [than her chronological age]," Esteller said. Her gut <span class="vocabulary-word" data-definition="The collection of bacteria and other microorganisms living in the digestive tract">microbiome</span> was also very young for her age with plenty of <span class="vocabulary-word" data-definition="A type of beneficial bacteria that helps with digestion and immune function">Bifidobacterium</span>, which is also considered beneficial to health.
+                </div>
+
+                <div class="paragraph" onclick="activateParagraph(8)">
+                    Her long life was not all down to genetics, however. Branyas was not overweight, ate a lot of yoghurt, and did not smoke or drink. She had a good social life with friends and family nearby. All surely helped, Esteller said. He hopes the wealth of information will help scientists develop new treatments to keep people healthy in old age.
+                </div>
+
+                <div class="paragraph" onclick="activateParagraph(9)">
+                    "We can develop drugs to reproduce the effects of good genes," he said. "Maria's parents gave her very good genes, but we cannot choose our parents." Prof João Pedro de Magalhães at the University of Birmingham, said: "These outliers in longevity could provide insights into how to age more gracefully. If we could figure out which specific genes are associated with extreme human longevity and healthy old age it could provide clues about mechanisms for ageing as well as <span class="vocabulary-word" data-definition="Suitable for being targeted by drugs or medical treatment">drugable</span> targets to develop interventions that allow everyone to live longer, healthier lives."
+                </div>
+
+                <button class="btn" onclick="startGames()" style="margin-top: 2rem;">
+                    <i class="fas fa-gamepad"></i> Let's Play Some Games!
+                </button>
+            </div>
+        </div>
+
+        <!-- Games Phase -->
+        <div class="phase" id="games">
+            <div class="header">
+                <h1><i class="fas fa-puzzle-piece"></i> Vocabulary Games</h1>
+                <p>Master the scientific vocabulary through interactive challenges!</p>
+            </div>
+
+            <div class="game-container">
+                <div class="game-card" onclick="startMemoryGame()">
+                    <div class="game-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Memory Match</h3>
+                    <p>Match scientific terms with their definitions</p>
+                </div>
+
+                <div class="game-card" onclick="startQuickMatch()">
+                    <div class="game-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Quick Match</h3>
+                    <p>Fast-paced vocabulary matching game</p>
+                </div>
+
+                <div class="game-card" onclick="startSynonymMatcher()">
+                    <div class="game-icon"><i class="fas fa-link"></i></div>
+                    <h3>Synonym Matcher</h3>
+                    <p>Connect advanced words with simpler synonyms</p>
+                </div>
+            </div>
+
+            <div id="gameArea" style="margin-top: 2rem;"></div>
+
+            <button class="btn" onclick="startPostReading()" style="margin-top: 2rem;">
+                <i class="fas fa-arrow-right"></i> Continue to Final Challenge
+            </button>
+        </div>
+
+        <!-- Post-Reading Phase -->
+        <div class="phase" id="postReading">
+            <div class="header">
+                <h1><i class="fas fa-trophy"></i> Final Challenge</h1>
+                <p>Test your understanding and recall of the text</p>
+            </div>
+
+            <div class="glass-card">
+                <h2 style="color: #4ecdc4; margin-bottom: 1.5rem;">
+                    <i class="fas fa-question-circle"></i> Comprehension Quiz
+                </h2>
+                
+                <div id="quizContainer">
+                    <!-- Quiz questions will be dynamically generated -->
+                </div>
+
+                <button class="btn" onclick="showResults()" style="margin-top: 2rem;">
+                    <i class="fas fa-check"></i> Show My Results
+                </button>
+            </div>
+        </div>
+
+        <!-- Completion Phase -->
+        <div class="phase" id="completion">
+            <div class="completion-celebration">
+                <h2><i class="fas fa-star"></i> Congratulations!</h2>
+                <p style="font-size: 1.2rem; color: #a0a0a0; margin-bottom: 2rem;">
+                    You've mastered the secrets of super longevity!
+                </p>
+
+                <div class="completion-stats">
+                    <div class="stat-card">
+                        <span class="stat-value" id="finalScore">0</span>
+                        <div>Total Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="vocabularyMastered">0</span>
+                        <div>Words Mastered</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="timeSpent">0</span>
+                        <div>Minutes Spent</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="accuracyRate">0%</span>
+                        <div>Accuracy Rate</div>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="text-align: left;">
+                    <h3 style="color: #4ecdc4; margin-bottom: 1rem;">
+                        <i class="fas fa-key"></i> Key Takeaways
+                    </h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 1rem 0; padding: 1rem; background: rgba(78, 205, 196, 0.1); border-radius: 10px;">
+                            <i class="fas fa-dna" style="color: #4ecdc4; margin-right: 10px;"></i>
+                            Genetics play a crucial role in longevity, but lifestyle choices matter too
+                        </li>
+                        <li style="margin: 1rem 0; padding: 1rem; background: rgba(255, 107, 107, 0.1); border-radius: 10px;">
+                            <i class="fas fa-shield-alt" style="color: #ff6b6b; margin-right: 10px;"></i>
+                            Telomeres can actually protect against cancer when extremely short
+                        </li>
+                        <li style="margin: 1rem 0; padding: 1rem; background: rgba(69, 183, 209, 0.1); border-radius: 10px;">
+                            <i class="fas fa-brain" style="color: #45b7d1; margin-right: 10px;"></i>
+                            Being old doesn't necessarily mean being sick
+                        </li>
+                    </ul>
+                </div>
+
+                <button class="btn" onclick="restartActivity()">
+                    <i class="fas fa-redo"></i> Experience Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Definition Popup -->
+    <div class="definition-popup" id="definitionPopup"></div>
+
+    <!-- Modal for games -->
+    <div class="modal" id="gameModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Game Title</h3>
+            <div id="modalContent">Game content</div>
+            <button class="btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentPhase = 0;
+        let score = 0;
+        let vocabularyCount = 0;
+        let startTime = Date.now();
+        let correctAnswers = 0;
+        let totalQuestions = 0;
+
+        const phases = ['preReading', 'reading', 'games', 'postReading', 'completion'];
+        
+        const vocabularyData = {
+            'supercentenarian': 'A person who has reached the age of 110 or more',
+            'faltering': 'To weaken or fail gradually',
+            'comprehensive': 'Covering all or nearly all elements or aspects; complete',
+            'plague': 'To cause suffering or trouble persistently',
+            'leukaemia': 'A type of cancer that affects blood and bone marrow',
+            'ripe': 'Fully mature; ready for harvesting or eating (used figuratively to mean "advanced" age)',
+            'genetics': 'The study of heredity and genetic variation',
+            'breakdown products': 'Products formed when substances are broken down by chemical processes in the body',
+            'microbes': 'Tiny living organisms, especially bacteria',
+            'trove': 'A collection of valuable items or information',
+            'telomeres': 'Protective DNA-protein structures found at the end of chromosomes that shorten with age',
+            'chromosomes': 'Thread-like structures containing DNA and genetic information',
+            'inflammation': 'The body\'s response to injury or infection, often involving swelling and pain',
+            'mutations': 'Changes in DNA that can occur naturally or due to environmental factors',
+            'dementia': 'A decline in mental ability severe enough to interfere with daily life',
+            'cholesterol': 'A waxy substance that can build up in arteries; also essential for making hormones',
+            'metabolism': 'The chemical processes by which the body converts food into energy',
+            'epigenetic clocks': 'Methods that measure biological age based on changes in gene activity',
+            'microbiome': 'The collection of bacteria and other microorganisms living in the digestive tract',
+            'Bifidobacterium': 'A type of beneficial bacteria that helps with digestion and immune function',
+            'drugable': 'Suitable for being targeted by drugs or medical treatment'
+        };
+
+        const quizQuestions = [
+            {
+                question: "How old was Maria Branyas Morera when she died?",
+                options: ["115 years old", "117 years old", "120 years old", "113 years old"],
+                correct: 1
+            },
+            {
+                question: "What did researchers find unusual about Maria's telomeres?",
+                options: ["They were extremely long", "They were exceptionally short", "They were normal length", "They were missing"],
+                correct: 1
+            },
+            {
+                question: "According to the study, being old doesn't necessarily mean what?",
+                options: ["Being wise", "Being tired", "Being sick", "Being lonely"],
+                correct: 2
+            },
+            {
+                question: "What type of beneficial bacteria was found in Maria's gut?",
+                options: ["E. coli", "Bifidobacterium", "Lactobacillus", "Streptococcus"],
+                correct: 1
+            },
+            {
+                question: "How much younger was Maria's biological age compared to her chronological age?",
+                options: ["5-8 years", "10-15 years", "20-25 years", "2-5 years"],
+                correct: 1
+            }
+        ];
+
+        // Initialize the activity
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingParticles();
+            updateProgress();
+            
+            // Add vocabulary word hover effects
+            document.addEventListener('mouseover', function(e) {
+                if (e.target.classList.contains('vocabulary-word')) {
+                    showDefinition(e.target, e.target.dataset.definition);
+                }
+            });
+
+            document.addEventListener('mouseout', function(e) {
+                if (e.target.classList.contains('vocabulary-word')) {
+                    hideDefinition();
+                }
+            });
+        });
+
+        function createFloatingParticles() {
+            const container = document.querySelector('.floating-particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentPhase + 1) / phases.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('phaseIndicator').textContent = getPhaseTitle();
+        }
+
+        function getPhaseTitle() {
+            const titles = ['Pre-Reading', 'Reading', 'Games', 'Post-Reading', 'Complete!'];
+            return titles[currentPhase];
+        }
+
+        function updateScore(points) {
+            score += points;
+            document.getElementById('scoreValue').textContent = score;
+        }
+
+        function startReading() {
+            // Process survey answers
+            const formData = new FormData();
+            const radioInputs = document.querySelectorAll('input[type="radio"]:checked');
+            radioInputs.forEach(input => {
+                formData.append(input.name, input.value);
+            });
+            
+            updateScore(radioInputs.length * 10); // 10 points per answered question
+            
+            currentPhase = 1;
+            showPhase('reading');
+            updateProgress();
+        }
+
+        function activateParagraph(index) {
+            const paragraphs = document.querySelectorAll('.paragraph');
+            paragraphs.forEach(p => p.classList.remove('active'));
+            paragraphs[index].classList.add('active');
+            updateScore(5); // 5 points for reading each paragraph
+        }
+
+        function showDefinition(element, definition) {
+            const popup = document.getElementById('definitionPopup');
+            popup.textContent = definition;
+            popup.classList.add('show');
+            
+            const rect = element.getBoundingClientRect();
+            popup.style.left = rect.left + 'px';
+            popup.style.top = (rect.bottom + 10) + 'px';
+            
+            vocabularyCount++;
+            updateScore(2); // 2 points per vocabulary interaction
+        }
+
+        function hideDefinition() {
+            document.getElementById('definitionPopup').classList.remove('show');
+        }
+
+        function startGames() {
+            currentPhase = 2;
+            showPhase('games');
+            updateProgress();
+        }
+
+        function startMemoryGame() {
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = '<h3 style="color: #4ecdc4; margin-bottom: 1rem;"><i class="fas fa-brain"></i> Drag & Match Game</h3><p style="color: #a0a0a0; margin-bottom: 1.5rem;">Drag words from the left column to match with definitions on the right!</p>';
+            
+            const vocabularyPairs = Object.entries(vocabularyData).slice(0, 6); // Use 6 pairs for cleaner layout
+            const words = vocabularyPairs.map(([word, _]) => word);
+            const definitions = vocabularyPairs.map(([_, definition]) => definition);
+            
+            // Shuffle definitions to make it challenging
+            for (let i = definitions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [definitions[i], definitions[j]] = [definitions[j], definitions[i]];
+            }
+            
+            const matchContainer = document.createElement('div');
+            matchContainer.innerHTML = `
+                <div class="match-game-container">
+                    <div class="match-column">
+                        <h4 style="color: #ff6b6b; margin-bottom: 1rem; text-align: center;">
+                            <i class="fas fa-grip-vertical"></i> Scientific Terms
+                        </h4>
+                        <div class="match-cards" id="wordsColumn">
+                            ${words.map((word, index) => `
+                                <div class="match-card word-card" draggable="true" data-word="${word}" data-index="${index}">
+                                    <i class="fas fa-grip-lines"></i> ${word}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="match-column">
+                        <h4 style="color: #4ecdc4; margin-bottom: 1rem; text-align: center;">
+                            <i class="fas fa-bullseye"></i> Definitions
+                        </h4>
+                        <div class="match-cards" id="definitionsColumn">
+                            ${definitions.map((definition, index) => `
+                                <div class="match-card definition-card" data-definition="${definition}" data-index="${index}">
+                                    <i class="fas fa-quote-left"></i> ${definition}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            gameArea.appendChild(matchContainer);
+            
+            // Initialize drag and drop
+            initializeDragAndDrop(vocabularyPairs);
+        }
+        
+        function initializeDragAndDrop(vocabularyPairs) {
+            let draggedElement = null;
+            let matchedCount = 0;
+            
+            // Add drag listeners to word cards
+            const wordCards = document.querySelectorAll('.word-card');
+            wordCards.forEach(card => {
+                card.addEventListener('dragstart', function(e) {
+                    draggedElement = this;
+                    this.style.opacity = '0.5';
+                    this.style.transform = 'rotate(5deg)';
+                });
+                
+                card.addEventListener('dragend', function() {
+                    this.style.opacity = '1';
+                    this.style.transform = 'none';
+                    draggedElement = null;
+                });
+            });
+            
+            // Add drop listeners to definition cards
+            const definitionCards = document.querySelectorAll('.definition-card');
+            definitionCards.forEach(card => {
+                card.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    if (!this.classList.contains('matched')) {
+                        this.style.transform = 'scale(1.05)';
+                        this.style.borderColor = '#4ecdc4';
+                    }
+                });
+                
+                card.addEventListener('dragleave', function() {
+                    if (!this.classList.contains('matched')) {
+                        this.style.transform = 'none';
+                        this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    }
+                });
+                
+                card.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'none';
+                    
+                    if (!draggedElement || this.classList.contains('matched')) return;
+                    
+                    const draggedWord = draggedElement.dataset.word;
+                    const targetDefinition = this.dataset.definition;
+                    
+                    // Check if it's a correct match
+                    const isCorrectMatch = vocabularyPairs.some(([word, definition]) => 
+                        word === draggedWord && definition === targetDefinition
+                    );
+                    
+                    if (isCorrectMatch) {
+                        // Correct match - turn both green
+                        this.classList.add('matched', 'correct');
+                        draggedElement.classList.add('matched', 'correct');
+                        this.style.borderColor = '#4ecdc4';
+                        draggedElement.style.borderColor = '#4ecdc4';
+                        
+                        matchedCount++;
+                        updateScore(25); // 25 points per correct match
+                        
+                        // Success animation
+                        this.style.animation = 'pulse 0.5s ease-in-out';
+                        draggedElement.style.animation = 'pulse 0.5s ease-in-out';
+                        
+                        if (matchedCount === vocabularyPairs.length) {
+                            setTimeout(() => {
+                                showModal('Perfect Match!', 'You matched all terms correctly! 🎉');
+                                updateScore(50); // Bonus for completing
+                            }, 500);
+                        }
+                    } else {
+                        // Incorrect match - flash red
+                        this.classList.add('incorrect');
+                        draggedElement.classList.add('incorrect');
+                        
+                        setTimeout(() => {
+                            this.classList.remove('incorrect');
+                            draggedElement.classList.remove('incorrect');
+                        }, 1000);
+                    }
+                });
+            });
+        }
+
+        function startQuickMatch() {
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = '<h3 style="color: #4ecdc4; margin-bottom: 1rem;"><i class="fas fa-bolt"></i> Quick Match Game</h3>';
+            
+            const vocabularyArray = Object.entries(vocabularyData);
+            let currentQuestion = 0;
+            let gameScore = 0;
+            
+            function showNextQuestion() {
+                if (currentQuestion >= 10) { // Show 10 questions
+                    showModal('Quick Match Complete!', `You scored ${gameScore}/10 correct answers!`);
+                    updateScore(gameScore * 10);
+                    return;
+                }
+                
+                const [correctWord, correctDefinition] = vocabularyArray[currentQuestion];
+                const wrongOptions = vocabularyArray.filter((_, i) => i !== currentQuestion).slice(0, 3);
+                const options = [correctDefinition, ...wrongOptions.map(([_, def]) => def)];
+                
+                // Shuffle options
+                for (let i = options.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [options[i], options[j]] = [options[j], options[i]];
+                }
+                
+                const correctIndex = options.indexOf(correctDefinition);
+                
+                const questionHTML = `
+                    <div class="glass-card">
+                        <h4 style="color: #ff6b6b; margin-bottom: 1rem;">Question ${currentQuestion + 1}/10</h4>
+                        <h3 style="margin-bottom: 1.5rem;">What does "${correctWord}" mean?</h3>
+                        <div class="survey-grid">
+                            ${options.map((option, index) => `
+                                <button class="option" onclick="selectQuickAnswer(${index}, ${correctIndex})">
+                                    ${option}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                gameArea.innerHTML = questionHTML;
+                currentQuestion++;
+            }
+            
+            window.selectQuickAnswer = function(selected, correct) {
+                if (selected === correct) {
+                    gameScore++;
+                    showFeedback('Correct! 🎉', true);
+                } else {
+                    showFeedback('Not quite right. Try again! 🤔', false);
+                }
+                
+                setTimeout(showNextQuestion, 1500);
+            };
+            
+            showNextQuestion();
+        }
+
+        function startSynonymMatcher() {
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = `
+                <div class="header" style="margin-bottom: 2rem;">
+                    <h1><i class="fas fa-link"></i> INTUITY</h1>
+                    <p>Intuitive & Immersive Learning<br><span style="font-size: 0.8rem; opacity: 0.7;">By Majid Nashtai</span></p>
+                </div>
+                <h3 style="color: #4ecdc4; margin-bottom: 1rem;"><i class="fas fa-graduation-cap"></i> Advanced Synonym Matcher</h3>
+                <p style="color: #a0a0a0; margin-bottom: 1.5rem;">Connect advanced vocabulary from the text with their simpler synonyms!</p>
+            `;
+            
+            const synonymPairs = {
+                'comprehensive': 'complete',
+                'faltering': 'weakening', 
+                'plague': 'trouble',
+                'ripe': 'mature',
+                'trove': 'collection',
+                'prone': 'likely',
+                'exceptionally': 'extremely',
+                'seemingly': 'apparently',
+                'critical': 'essential',
+                'efficient': 'effective'
+            };
+            
+            const words = Object.keys(synonymPairs);
+            const synonyms = Object.values(synonymPairs);
+            
+            // Shuffle synonyms to make it challenging
+            for (let i = synonyms.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [synonyms[i], synonyms[j]] = [synonyms[j], synonyms[i]];
+            }
+            
+            const matchContainer = document.createElement('div');
+            matchContainer.innerHTML = `
+                <div class="synonym-matching-container" id="synonymMatchingContainer">
+                    <div class="synonym-column">
+                        <div class="synonym-column-header">
+                            <i class="fas fa-graduation-cap"></i> Advanced Words
+                        </div>
+                        ${words.map((word, index) => `
+                            <div class="synonym-card" data-word="${word}" data-index="${index}">
+                                ${word}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="synonym-column">
+                        <div class="synonym-column-header">
+                            <i class="fas fa-lightbulb"></i> Simple Synonyms
+                        </div>
+                        ${synonyms.map((synonym, index) => `
+                            <div class="synonym-card" data-word="${synonym}" data-index="${index + 10}">
+                                ${synonym}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            gameArea.appendChild(matchContainer);
+            
+            // Initialize synonym matching game
+            initializeSynonymMatching(synonymPairs);
+        }
+        
+        function initializeSynonymMatching(synonymPairs) {
+            let selectedCard = null;
+            let matchedCount = 0;
+            const totalPairs = Object.keys(synonymPairs).length;
+            
+            const synonymCards = document.querySelectorAll('.synonym-card');
+            synonymCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    if (this.classList.contains('matched')) return;
+                    
+                    // If no card is selected, select this one
+                    if (!selectedCard) {
+                        selectedCard = this;
+                        this.classList.add('selected');
+                        return;
+                    }
+                    
+                    // If clicking the same card, deselect it
+                    if (selectedCard === this) {
+                        this.classList.remove('selected');
+                        selectedCard = null;
+                        return;
+                    }
+                    
+                    // Try to make a match
+                    const word1 = selectedCard.dataset.word;
+                    const word2 = this.dataset.word;
+                    
+                    // Check if it's a correct match
+                    const isCorrectMatch = (synonymPairs[word1] === word2) || (synonymPairs[word2] === word1);
+                    
+                    if (isCorrectMatch) {
+                        // Correct match!
+                        selectedCard.classList.remove('selected');
+                        selectedCard.classList.add('matched');
+                        this.classList.add('matched');
+                        
+                        // Draw connection line
+                        drawSynonymConnectionLine(selectedCard, this);
+                        
+                        matchedCount++;
+                        updateScore(20); // 20 points per correct match
+                        
+                        // Success animation
+                        selectedCard.style.animation = 'pulse 0.6s ease-in-out';
+                        this.style.animation = 'pulse 0.6s ease-in-out';
+                        
+                        setTimeout(() => {
+                            selectedCard.style.animation = '';
+                            this.style.animation = '';
+                        }, 600);
+                        
+                        if (matchedCount === totalPairs) {
+                            setTimeout(() => {
+                                showModal('🎓 Vocabulary Master!', 'Perfect! You\'ve mastered all advanced vocabulary connections! 🌟');
+                                updateScore(50); // Bonus for completing
+                            }, 500);
+                        }
+                    } else {
+                        // Incorrect match - flash red
+                        selectedCard.classList.add('incorrect');
+                        this.classList.add('incorrect');
+                        
+                        setTimeout(() => {
+                            selectedCard.classList.remove('incorrect', 'selected');
+                            this.classList.remove('incorrect');
+                        }, 600);
+                    }
+                    
+                    selectedCard = null;
+                });
+            });
+        }
+        
+        function drawSynonymConnectionLine(card1, card2) {
+            const rect1 = card1.getBoundingClientRect();
+            const rect2 = card2.getBoundingClientRect();
+            const container = document.getElementById('synonymMatchingContainer').getBoundingClientRect();
+            
+            const line = document.createElement('div');
+            line.className = 'synonym-connection-line';
+            
+            const x1 = rect1.right - container.left;
+            const y1 = rect1.top + rect1.height/2 - container.top;
+            const x2 = rect2.left - container.left;
+            const y2 = rect2.top + rect2.height/2 - container.top;
+            
+            const length = Math.sqrt((x2-x1)**2 + (y2-y1)**2);
+            const angle = Math.atan2(y2-y1, x2-x1) * 180/Math.PI;
+            
+            line.style.width = length + 'px';
+            line.style.left = x1 + 'px';
+            line.style.top = y1 + 'px';
+            line.style.transform = `rotate(${angle}deg)`;
+            line.style.transformOrigin = '0 50%';
+            
+            document.getElementById('synonymMatchingContainer').appendChild(line);
+        }
+
+        function startWordBuilder() {
+            showModal('Word Builder', 'Coming soon! This game will help you build scientific vocabulary from roots and prefixes.');
+            updateScore(25); // Participation points
+        }
+
+        function showFeedback(message, correct) {
+            const feedback = document.createElement('div');
+            feedback.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: ${correct ? 'linear-gradient(135deg, #4ecdc4, #45b7d1)' : 'linear-gradient(135deg, #ff6b6b, #ffa726)'};
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 15px;
+                font-size: 1.2rem;
+                font-weight: bold;
+                z-index: 1001;
+                animation: fadeIn 0.3s ease-in;
+            `;
+            feedback.textContent = message;
+            document.body.appendChild(feedback);
+            
+            setTimeout(() => {
+                feedback.remove();
+            }, 1500);
+        }
+
+        function startPostReading() {
+            currentPhase = 3;
+            showPhase('postReading');
+            updateProgress();
+            generateQuiz();
+        }
+
+        function generateQuiz() {
+            const quizContainer = document.getElementById('quizContainer');
+            let quizHTML = '';
+            
+            quizQuestions.forEach((question, index) => {
+                quizHTML += `
+                    <div class="survey-question">
+                        <h3><i class="fas fa-question"></i> ${question.question}</h3>
+                        ${question.options.map((option, optionIndex) => `
+                            <label class="option">
+                                <input type="radio" name="quiz${index}" value="${optionIndex}">
+                                <span class="custom-radio"></span>
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function showResults() {
+            let correctCount = 0;
+            quizQuestions.forEach((question, index) => {
+                const selectedAnswer = document.querySelector(`input[name="quiz${index}"]:checked`);
+                if (selectedAnswer && parseInt(selectedAnswer.value) === question.correct) {
+                    correctCount++;
+                }
+                totalQuestions++;
+            });
+            
+            correctAnswers = correctCount;
+            updateScore(correctCount * 20); // 20 points per correct answer
+            
+            currentPhase = 4;
+            showPhase('completion');
+            updateProgress();
+            showFinalStats();
+        }
+
+        function showFinalStats() {
+            const timeSpent = Math.round((Date.now() - startTime) / 60000); // Convert to minutes
+            const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / quizQuestions.length) * 100) : 0;
+            
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('vocabularyMastered').textContent = Object.keys(vocabularyData).length;
+            document.getElementById('timeSpent').textContent = Math.max(1, timeSpent);
+            document.getElementById('accuracyRate').textContent = accuracy + '%';
+            
+            // Trigger celebration animation
+            setTimeout(() => {
+                document.querySelector('.completion-celebration').style.animation = 'fadeIn 1s ease-in';
+            }, 500);
+        }
+
+        function showPhase(phaseId) {
+            document.querySelectorAll('.phase').forEach(phase => {
+                phase.classList.remove('active');
+            });
+            document.getElementById(phaseId).classList.add('active');
+        }
+
+        function showModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalContent').textContent = content;
+            document.getElementById('gameModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('gameModal').classList.remove('active');
+        }
+
+        function restartActivity() {
+            currentPhase = 0;
+            score = 0;
+            vocabularyCount = 0;
+            startTime = Date.now();
+            correctAnswers = 0;
+            totalQuestions = 0;
+            
+            document.getElementById('scoreValue').textContent = '0';
+            showPhase('preReading');
+            updateProgress();
+            
+            // Reset all radio buttons
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+            
+            // Reset paragraphs
+            document.querySelectorAll('.paragraph').forEach(p => {
+                p.classList.remove('active');
+            });
+        }
+
+        // Add some sound effects (optional)
+        function playSound(type) {
+            // This would play sound effects if audio files were available
+            // For now, we'll use visual feedback instead
+            if (type === 'success') {
+                document.body.style.animation = 'none';
+                setTimeout(() => {
+                    document.body.style.animation = 'pulse 0.3s ease-in-out';
+                }, 10);
+            }
+        }
+    </script>
+</body>
+</html>
